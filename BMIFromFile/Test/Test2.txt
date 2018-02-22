@@ -1,0 +1,4 @@
+Name: Spencer
+Feet: 6
+Inches: 1
+Weight (Pounds): 130

@@ -1,0 +1,4 @@
+Name: Bobby
+Feet: 6
+Inches: 1.5
+Weight (Pounds): 165
