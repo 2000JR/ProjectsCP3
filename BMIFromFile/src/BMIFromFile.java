@@ -1,4 +1,5 @@
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.*;
 public class BMIFromFile {
 	
@@ -11,7 +12,7 @@ public class BMIFromFile {
 	static double weightLBS = 0; // double
 	static double weightKG = weightLBS/2.2046; //double 
 	static double BMI = weightKG/ (height* height); //double
-	
+	static DecimalFormat Deci = new DecimalFormat("0.##"); 
 	//file creation testing
 	/*File Test = new File("test.txt"); 
 	File Test2 = new File("test2.txt");
@@ -26,8 +27,13 @@ public class BMIFromFile {
 	
 	public static void main (String[] args ) {
 	filechecker(); // checks for file
-	z(BMIdata); //ends up being the whole code
-	
+	try {
+		z(BMIdata);
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} //ends up being the whole code
+	System.out.println("BMI completed!");
   
     }
 
@@ -68,7 +74,7 @@ public static void filechecker() { // Checks for BMI file
 	}  else if ((BMIdata.exists() || (BMIdata.length() > 0)))
 		System.out.println("BMI data Found!");
 }
-public static void z(File file) {
+public static void z(File file) throws IOException {
 	boolean scan = true;
 
 	
@@ -86,7 +92,7 @@ public static void z(File file) {
 				Scanner Testfinder = new Scanner(Tests); // find the the files
 				while(Testfinder.hasNext()) {
 					String token = Testfinder.nextLine();
-					if (token.contains("Name: ")) { // gets the text after Name: for later saving into BMI.txt
+					if (token.contains("Name: ") ) { // gets the text after Name: for later saving into BMI.txt
 						name = token.substring(6);
 						
 						
@@ -99,25 +105,27 @@ public static void z(File file) {
 					} else if (token.contains("Inches: ")) {
 						inch = Double.parseDouble(token.substring(8));
 						inchtofeet = inch/12;
-						//System.out.println(inch);
+						
 					} else if (token.contains("Weight (Pounds): ")) {
 						weightLBS = Double.parseDouble(token.substring(17));
 						weightKG = weightLBS/2.2046; // have to convert it here
-						//System.out.println(weightLBS);
-						//System.out.println(weightKG);
+						
 						height = (feet + inchtofeet) * 0.3048;
 						
 						BMI = weightKG/ (height* height); 
-					System.out.println(name + ": " + BMI + "\n");
-						//System.out.println(BMI);
-						PrintWriter Writer = new PrintWriter(BMIdata); //
-						Writer.write(name + ": " + BMI + "\n"); // saves name and BMI to BMI.txt
-						Writer.write(name + ": " + BMI + "\n");
-						//Writer.write(name + ": " + BMI + "\n");
-						//Writer.write(name + ": " + BMI);
-						Writer.close();
-						System.out.println("BMI completed!");
+					System.out.println(name + ": " + Deci.format(BMI) );
 						
+					// fw,bw,pw are for writing each file's data separately
+					FileWriter fw = new FileWriter(file, true);
+					BufferedWriter BuffWriter = new BufferedWriter(fw);
+						PrintWriter Writer = new PrintWriter(BuffWriter); 
+						if (BMIdata.length() < 250)
+						Writer.write(name + ": " + Deci.format(BMI)); // saves name and BMI to BMI.txt
+						Writer.close();
+						BuffWriter.close();
+						fw.close();
+					
+					
 						
 					
 						
