@@ -44,8 +44,7 @@ public class Ships {
 		
 		Ships.shiplength = namer.nextInt();
 		
-		System.out.println(Ships.shipname);
-		System.out.println(Ships.shiplength);
+		
 		
 		
 	}
