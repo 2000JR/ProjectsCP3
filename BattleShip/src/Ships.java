@@ -1,17 +1,20 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Ships {
 	Scanner in = new Scanner(System.in);
-	static private String shipname;
-	static private int shiplength;
-	static private int shiphealth;
-	static int[][] shipposition = new int[0][0];
-	static String hit;
-	static boolean toobig;
-	
+	 private String shipname;
+		private int shiplength;
+		private int shiphealth;
+		String[][] shipPosition = new String[0][0];
+		String hit;
+		boolean toobig;
+		static Ships[] shiplist = new Ships[4];
+		static int shipnum = 0;
 	//private Arraylist<> Positioning; possibly for positioning
-	
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to the shape builder!");
@@ -19,34 +22,24 @@ public class Ships {
 		Shipsbuild();
 		//Scanner measurements = new Scanner(System.in);
 		System.out.println();
-		
+		//shipPosition[2][3] = "";
 	}
 
+	public Ships(String name, int length, int health, String[][] position) {
+
+		this.shipname = name;
+		this.shiplength = length;
+		this.shiphealth = health;
+		this.shipPosition = position;
+		Ships.shiplist[shipnum++] = new Ships(name, length, health, position);
 
 
 
-	public Ships(String name, int length, int health, int[][] position) {
-		
-		shipname = name = "null";
-		shiplength = length = 0;
-		shiphealth = health = 5;
-		shipposition = position;
-			
-			
-		
 
 
 	}
 	public static void Shipsbuild() {
-		
-		Scanner namer = new Scanner(System.in);
-		Ships.shipname = namer.next();
-		
-		Ships.shiplength = namer.nextInt();
-		
-		
-		
-		
+	
 	}
 }
 
