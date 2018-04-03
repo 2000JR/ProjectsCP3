@@ -4,42 +4,95 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Ships {
-	Scanner in = new Scanner(System.in);
-	 private String shipname;
+	//Scanner in = new Scanner(System.in);
+	 	private String shipname;
 		private int shiplength;
 		private int shiphealth;
-		String[][] shipPosition = new String[0][0];
-		String hit;
-		boolean toobig;
-		static Ships[] shiplist = new Ships[4];
+		private int x;
+		private int y;
+		private int[] hitList;
+		private boolean downright;
+		//String hit;
+		//boolean toobig;
+		public static ArrayList <Ships> shiplist = new ArrayList<Ships>();
 		static int shipnum = 0;
-	//private Arraylist<> Positioning; possibly for positioning
+		//private Arraylist<> Positioning; possibly for positioning
+		
+		public Ships(String name, int length) {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Welcome to the shape builder!");
-		System.out.println("How many ships do you want?");
-		Shipsbuild();
-		//Scanner measurements = new Scanner(System.in);
-		System.out.println();
-		//shipPosition[2][3] = "";
-	}
-
-	public Ships(String name, int length, int health, String[][] position) {
+			this.shipname = name;
+			this.shiplength = length;
+			this.shiphealth = length;
+			this.x =  (Integer) null;
+			this.y = (Integer) null;
+			this.downright = true;
+		}
+	public Ships(String name, int length, int x, int y, boolean downright) {
 
 		this.shipname = name;
 		this.shiplength = length;
-		this.shiphealth = health;
-		this.shipPosition = position;
-		Ships.shiplist[shipnum++] = new Ships(name, length, health, position);
-
-
-
-
+		this.shiphealth = length;
+		this.x = x;
+		this.y = y;
+		this.hitList = new int[length];
+		this.downright = downright;
+		for (int i = 0; i < this.shiplength; i++) {
+			this.hitList[i] = 0;		
+		}
+		
+		Ships.shiplist.add(this);
 
 	}
-	public static void Shipsbuild() {
+	public static void placement() {
+		
+	}
+	public static void shipcheck() {
+		
+	}
+	public static void Fire(int x, int y) { //ArrayList <Ships> shiplist
+		
+		for (Ships ship: shiplist) {
+			if (ship.downright = true && (ship.y == y) || (ship.x == x)) {
+				
+			}
+		}
+		
+		
+		System.out.println("Where do you want to fire?");
 	
+	}
+	public static void HitShip() {
+		
+	}
+	public String getShipname() {
+		return shipname;
+	}
+	public void setShipname(String shipname) {
+		this.shipname = shipname;
+	}
+	public int getShiplength() {
+		return shiplength;
+	}
+	public void setShiplength(int shiplength) {
+		this.shiplength = shiplength;
+	}
+	public int getShiphealth() {
+		return shiphealth;
+	}
+	public void setShiphealth(int shiphealth) {
+		this.shiphealth = shiphealth;
+	}
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
 	}
 }
 
