@@ -12,10 +12,13 @@ public class Battleship {
 		
 		int inputb;// Generic Input Value 2
 		
+		int shotx = 1;
+		int shoty = 2;
 		boolean downright;
 		Ships s1 = new Ships(" T1 ", 3, 0, 1, false);
 		Ships s2 = new Ships(" T2 ",3,4,5, false);
-		System.out.println("Input size of maps");// Allows user to control size of map
+		
+		System.out.println("Input size of maps" );// Allows user to control size of map
 
 		inputa = in.nextInt();
 
@@ -25,8 +28,8 @@ public class Battleship {
 
 		System.out.println("Input the y and x cords seperated by a space, where you want a ship");
 
-		inputa = in.nextInt();// y coordinate
-		s1.setY(inputa);
+		//inputa = in.nextInt();// y coordinate
+		s1.setY(in.nextInt());
 		inputb = in.nextInt();// x coordinate
 		s1.setX(inputb);
 		System.out.println("Input true for facing the ship down, input false for facing the ship right");
@@ -43,9 +46,16 @@ public class Battleship {
 				}
 		}
 		
-		hitcheck(minus1(inputa), minus1(inputb), mapmatrix);// How to input an attack on the player
-
+		//hitcheck(minus1(shotx), minus1(shoty), mapmatrix);// How to input an attack on the player
+		if (hitcheck(minus1(shotx), minus1(shoty), mapmatrix) == true) {
+			
+			mapmatrix[minus1(shotx)][minus1(shoty)] = " H1 " ;
+		}
 		mapprint(mapmatrix);// prints out whatever map you enter into it
+		
+		System.out.println("\n");
+		
+		
 	}
 
 	public static String[][] teammap(int mapsize) {// Creates the User's own map
@@ -94,7 +104,7 @@ public class Battleship {
 		}
 
 	}
-
+	
 	public static int minus1(int num) {// minuses by one, pointless but used to ensure that the users inputs are
 										// correct due to 0 being the beginning
 		return num - 1;
@@ -104,13 +114,17 @@ public class Battleship {
 	public static boolean hitcheck(int x, int y, String[][] matrix) {// Checks to see if a ships is located at that
 																		// location and if it is not damaged already
 
-		if (matrix[x][y] != " ~~ " && matrix[x][y].contains("S")) {
+		if (matrix[x][y] != " ~~ " && matrix[x][y].contains( "T1" )) {
 			System.out.println("HIT");
+			
+			
+			
 			return true;
+			
 		} else {
 			System.out.println("MISS");
 			return false;
 		}
-	}
+	} 
 
 }

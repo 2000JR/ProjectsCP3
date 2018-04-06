@@ -53,14 +53,24 @@ public class Ships {
 		
 		for (Ships ship: shiplist) {
 			if (ship.downright = true && (ship.y == y) || (ship.x == x)) {
-				
+				System.out.println("hit");
+					Ships tempship = ship ;
+				for(int i=0; i< tempship.getShiplength(); i-- ) {
+				Battleship.mapmatrix[tempship.getY()][tempship.getX()] = tempship.getShipname();// Allows you to input the value on the map
+				}
+			} else {
+				Ships tempship = ship;
+				for(int i=0; i< tempship.getShiplength(); i--) {
+					Battleship.mapmatrix[tempship.getY()][tempship.getX()] = tempship.getShipname();// Allows you to input the value on the map
+					}
+			}
 			}
 		}
 		
 		
-		System.out.println("Where do you want to fire?");
+		
 	
-	}
+	
 	public static void HitShip() {
 		
 	}
@@ -94,5 +104,7 @@ public class Ships {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	
 }
 
