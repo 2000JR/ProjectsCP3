@@ -71,9 +71,6 @@ public class Ships {
 		
 	
 	
-	public static void HitShip() {
-		
-	}
 	public String getShipname() {
 		return shipname;
 	}

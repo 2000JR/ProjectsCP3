@@ -4,9 +4,10 @@ import java.util.Scanner;
 public class Battleship {
 	static String[][] mapmatrix;
 	static String[][] attackmap;
-
+	boolean playing = true;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		while (true) {
 		Scanner in = new Scanner(System.in);
 		int inputa;// Generic Input Value 1
 		
@@ -14,7 +15,8 @@ public class Battleship {
 		
 		int shotx = 1;
 		int shoty = 2;
-		boolean downright;
+		boolean downright; 
+		
 		Ships s1 = new Ships(" T1 ", 3, 0, 1, false);
 		Ships s2 = new Ships(" T2 ",3,4,5, false);
 		
@@ -57,7 +59,7 @@ public class Battleship {
 		
 		
 	}
-
+	}
 	public static String[][] teammap(int mapsize) {// Creates the User's own map
 
 		mapmatrix = new String[mapsize][mapsize];// Declaring matrix
@@ -125,6 +127,11 @@ public class Battleship {
 			System.out.println("MISS");
 			return false;
 		}
+	
 	} 
-
+	public static void createship(String name, int length, int x, int y) {
+		Ships newship = new Ships(name, length);
+		
+		//Ships.shiplist.add();
+	}
 }
