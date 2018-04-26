@@ -12,6 +12,10 @@ public class Ships {
 		private int y;
 		private int[] hitList;
 		private boolean downright;
+		private int seg1 = 1;
+		private int seg2 = 1;
+		private int seg3 = 1;
+		private int[] health = {1,1,1};
 		//String hit;
 		//boolean toobig;
 		public static ArrayList <Ships> shiplist = new ArrayList<Ships>();
@@ -23,11 +27,11 @@ public class Ships {
 			this.shipname = name;
 			this.shiplength = length;
 			this.shiphealth = length;
-			this.x =  (Integer) null;
-			this.y = (Integer) null;
-			this.downright = true;
+			this.x =  0;
+			this.y = 0;
+			
 		}
-	public Ships(String name, int length, int x, int y, boolean downright) {
+	public Ships(String name, int length, int x, int y,boolean downright ) {
 
 		this.shipname = name;
 		this.shiplength = length;
@@ -35,11 +39,14 @@ public class Ships {
 		this.x = x;
 		this.y = y;
 		this.hitList = new int[length];
-		this.downright = downright;
 		for (int i = 0; i < this.shiplength; i++) {
 			this.hitList[i] = 0;		
 		}
-		
+		this.setHealth(new int[]{seg1,seg2,seg3});
+		for (int i = 0; i < this.shiplength; i++) {
+			this.getHealth()[i] = 1;
+		}
+	
 		Ships.shiplist.add(this);
 
 	}
@@ -49,28 +56,12 @@ public class Ships {
 	public static void shipcheck() {
 		
 	}
-	public static void Fire(int x, int y) { //ArrayList <Ships> shiplist
+	public static void Fire() {
 		
-		for (Ships ship: shiplist) {
-			if (ship.downright = true && (ship.y == y) || (ship.x == x)) {
-				System.out.println("hit");
-					Ships tempship = ship ;
-				for(int i=0; i< tempship.getShiplength(); i-- ) {
-				Battleship.mapmatrix[tempship.getY()][tempship.getX()] = tempship.getShipname();// Allows you to input the value on the map
-				}
-			} else {
-				Ships tempship = ship;
-				for(int i=0; i< tempship.getShiplength(); i--) {
-					Battleship.mapmatrix[tempship.getY()][tempship.getX()] = tempship.getShipname();// Allows you to input the value on the map
-					}
-			}
-			}
-		}
+	}
+	public static void HitShip() {
 		
-		
-		
-	
-	
+	}
 	public String getShipname() {
 		return shipname;
 	}
@@ -101,7 +92,16 @@ public class Ships {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
-	
+	public boolean getDownright() {
+		return downright;
+	}
+	public void setDownright(boolean downright) {
+		this.downright = downright;
+	}
+	public int[] getHealth() {
+		return health;
+	}
+	public void setHealth(int[] health) {
+		this.health = health;
+	}
 }
-

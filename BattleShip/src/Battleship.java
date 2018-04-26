@@ -1,65 +1,183 @@
-
 import java.util.Scanner;
 
 public class Battleship {
 	static String[][] mapmatrix;
 	static String[][] attackmap;
-	boolean playing = true;
+	static boolean downright;
+	static Scanner in = new Scanner(System.in);
+	static Ships s1 = new Ships(" S1 ", 3, 0, 1, true);
+	static Ships s2 = new Ships(" S2 ", 3, 0, 1, true);
+	static Ships s3 = new Ships(" S3 ", 3, 0, 1, true);
+	static Ships s4 = new Ships(" S4 ", 3, 0, 1, true);
+	static int inputa;
+	static int inputb;// Generic Input Value 2// Generic Input Value 1
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		while (true) {
-		Scanner in = new Scanner(System.in);
-		int inputa;// Generic Input Value 1
+
+		boolean game=true;
+	
 		
-		int inputb;// Generic Input Value 2
 		
-		int shotx = 1;
-		int shoty = 2;
-		boolean downright; 
-		
-		Ships s1 = new Ships(" T1 ", 3, 0, 1, false);
-		Ships s2 = new Ships(" T2 ",3,4,5, false);
-		
-		System.out.println("Input size of maps" );// Allows user to control size of map
+		System.out.println(s4.getHealth());
+		System.out.println("Input size of maps");// Allows user to control size of map
 
 		inputa = in.nextInt();
 
 		teammap(inputa);// The map with your own ships on it
 
 		attackmap(inputa);// the map that marks the hits and misses on the enemy map
-
-		System.out.println("Input the y and x cords seperated by a space, where you want a ship");
-
-		//inputa = in.nextInt();// y coordinate
-		s1.setY(in.nextInt());
-		inputb = in.nextInt();// x coordinate
-		s1.setX(inputb);
-		System.out.println("Input true for facing the ship down, input false for facing the ship right");
-		downright=in.nextBoolean();
-		if(downright) {
+		in.nextLine();
+		System.out.println("Input Battle for battle team, Input HQ for HQ team");
+		
+		switch (in.nextLine()) { 
+		case "Battle":
+			
+				
+			//Creating ships on map !NEED TO MAKE METHOD FOR THIS!
+			
+		placingship(s1);
+		mapprint(mapmatrix);
+		
+		
+		
+	placingship(s2);
+	mapprint(mapmatrix);
 	
-			for(int i=0; i<s1.getShiplength(); i++ ) {
-			mapmatrix[s1.getY()-1+i][s1.getX()-1] = s1.getShipname();// Allows you to input the value on the map
+placingship(s3);
+
+mapprint(mapmatrix);
+
+
+placingship(s4);
+
+mapprint(mapmatrix);
+
+System.out.println("");
+//Finished placing ships
+
+while(game) {
+	/*mapprint(attackmap);
+	
+	System.out.println("Where do you want to attack?");
+	hitcheck(attackmap);
+	
+	System.out.println("Where did the enemy attack you?");
+	hitcheck(mapmatrix); */
+	
+	System.out.println("Which ship will you move?\n s1, s2, s3, s4");
+	switch(in.nextLine()) {
+	case "s1":
+		System.out.println("Forward=true, Backward = false");
+		boolean move1= in.nextBoolean();
+		if(move1) {
+			movingforward(s1);
+			mapprint(mapmatrix);
+		}
+		else {
+			movingbackward(s1);
+			mapprint(mapmatrix);
+		}
+	case "s2":
+		System.out.println("Forward=true, Backward = false");
+		boolean move2= in.nextBoolean();
+		if(move2) {
+			movingforward(s2);
+		}
+		else {
+			movingbackward(s2);
+			
+		}
+	case "s3":
+		System.out.println("Forward=true, Backward = false");
+		boolean move3= in.nextBoolean();
+		if(move3) {
+			movingforward(s3);
+		}
+		else {
+			movingbackward(s3);
+			
+		}
+	case "s4":
+		System.out.println("Forward=true, Backward = false");
+		boolean move4= in.nextBoolean();
+		if(move4) {
+			movingforward(s4);
+		}
+		else {
+			movingbackward(s4);
+			
+		}
+		mapprint(mapmatrix);
+	}
+}
+		case "HQ":
+			
+		}
+		
+		mapprint(mapmatrix);
+		System.out.println(" ");
+		
+	//	hitcheck(minus1(inputa), minus1(inputb), mapmatrix);// How to input an attack on the player
+
+		mapprint(mapmatrix);// prints out whatever map you enter into it
+	}
+	
+	public static void movingforward(Ships ship) {
+		if (ship.getDownright()) {
+			mapmatrix[ship.getY()][ship.getX()] =" ~~ ";
+			ship.setY(ship.getY()+1);
+			placingship(ship);
+		} else {
+			mapmatrix[ship.getY()][ship.getX()] =" ~~ ";
+			ship.setX(ship.getX()+1);
+			placingship(ship);
+		}
+	}
+	public static void movingbackward(Ships ship) {
+		if (ship.getDownright()) {
+			mapmatrix[ship.getY()+ship.getShiplength()-2][ship.getX()-1] =" ~~ ";
+			ship.setY(ship.getY()-1);
+			
+			placingship(ship);
+		} else {
+			mapmatrix[ship.getY()+1][ship.getX()+ship.getShiplength()-2] =" ~~ ";
+			ship.setX(ship.getX()-1);
+		
+			placingship(ship);
+		}
+	}
+	public static void placingship(Ships ship) {
+		System.out.println("Input the x and y cords seperated by a space, where you want a "+ship.getShiplength()+" space ship");
+		//boolean conflict = false;
+		
+		inputa = in.nextInt();// x coordinate
+		ship.setX(inputa-1);
+		
+		inputb = in.nextInt();// y coordinate
+		ship.setY(inputb-1);
+		
+		System.out.println("Input true for facing the ship down, input false for facing the ship right");
+		ship.setDownright(in.nextBoolean());
+		
+		if(ship.getDownright()) {
+			
+			for(int i=0; i<ship.getShiplength(); i++ ) {
+			mapmatrix[ship.getY()+i][ship.getX()] = ship.getShipname();// Allows you to input the value on the map
 			}
 		} else {
 			
-			for(int i=0; i<s1.getShiplength(); i++ ) {
-				mapmatrix[s1.getY()-1][s1.getX()-1+i] = s1.getShipname();// Allows you to input the value on the map
+			for(int i=0; i<ship.getShiplength(); i++ ) {
+				mapmatrix[ship.getY()][ship.getX()+i] = ship.getShipname();// Allows you to input the value on the map
 				}
-		}
-		
-		//hitcheck(minus1(shotx), minus1(shoty), mapmatrix);// How to input an attack on the player
-		if (hitcheck(minus1(shotx), minus1(shoty), mapmatrix) == true) {
+		} if ((s2.getX() == s1.getX()) && (s2.getY() == s1.getY())) {
+			//conflict = true;
 			
-			mapmatrix[minus1(shotx)][minus1(shoty)] = " H1 " ;
+			System.out.println("Cant place");
 		}
-		mapprint(mapmatrix);// prints out whatever map you enter into it
-		
-		System.out.println("\n");
-		
-		
+	//	while (true) {
+			
+		//}
 	}
-	}
+
 	public static String[][] teammap(int mapsize) {// Creates the User's own map
 
 		mapmatrix = new String[mapsize][mapsize];// Declaring matrix
@@ -106,32 +224,28 @@ public class Battleship {
 		}
 
 	}
-	
+
 	public static int minus1(int num) {// minuses by one, pointless but used to ensure that the users inputs are
 										// correct due to 0 being the beginning
 		return num - 1;
 
 	}
 
-	public static boolean hitcheck(int x, int y, String[][] matrix) {// Checks to see if a ships is located at that
-																		// location and if it is not damaged already
-
-		if (matrix[x][y] != " ~~ " && matrix[x][y].contains( "T1" )) {
-			System.out.println("HIT");
+	public static void hitcheck(String[][] matrix) {
+		System.out.println("X coord");
+		int x = in.nextInt()-1;
+		System.out.println("y coord");
+		int y = in.nextInt()-1;
+		System.out.println("hit? True/False");
+		boolean hit = in.nextBoolean();
+		if(hit) {
+			matrix[x][y] = " XX ";  
 			
-			
-			
-			return true;
-			
-		} else {
-			System.out.println("MISS");
-			return false;
 		}
-	
-	} 
-	public static void createship(String name, int length, int x, int y) {
-		Ships newship = new Ships(name, length);
 		
-		//Ships.shiplist.add();
+		else {
+			matrix[x][y] = " OO ";
+		}
 	}
+
 }
