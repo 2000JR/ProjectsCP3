@@ -1,3 +1,5 @@
+import java.awt.Point;
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class Battleship {
@@ -21,7 +23,7 @@ public class Battleship {
 
 
 		System.out.println("Input size of maps");// Allows user to control size of map
-
+		
 		inputa = in.nextInt();
 		bounds=inputa;
 		teammap(inputa);// The map with your own ships on it
@@ -76,6 +78,7 @@ String hqbattle = in.nextLine();
 				System.out.println("Where did the enemy attack you?");
 				System.out.println("before Hit check method");
 				hitcheck(mapmatrix);
+				
 				mapprint(mapmatrix);
 				break;
 			case 3:
@@ -235,18 +238,24 @@ String hqbattle = in.nextLine();
 		s1.setY(in.nextInt()-1);
 		s1.setShiplength(3);
 		s1.setDownright(in.nextBoolean());
+		s1.setShippart();
+		
 		s2.setX(in.nextInt());
 		s2.setY(in.nextInt());
 		s2.setShiplength(3);
 		s2.setDownright(in.nextBoolean());
+		s2.setShippart();
 		s3.setX(in.nextInt());
 		s3.setY(in.nextInt());
 		s3.setShiplength(3);
 		s3.setDownright(in.nextBoolean());
+		s3.setShippart();
+		
 		s4.setX(in.nextInt());
 		s4.setY(in.nextInt());
 		s4.setShiplength(3);
 		s4.setDownright(in.nextBoolean());
+		s4.setShippart();
 		placingship(s1);
 		placingship(s2);
 		placingship(s3);
@@ -449,8 +458,9 @@ String hqbattle = in.nextLine();
 		System.out.println("y coordinate");
 		int y = in.nextInt() - 1;
 		
-		if(Ships.registerHitforAllShips(Ships.shiplist, x, y)  == true  ) {
+		if(Ships.registerHitforAllShips(Ships.shiplist, x, y) == true  ) {
 			System.out.println("HIT");
+			
 		}
 		else {
 			System.out.println("Miss");
